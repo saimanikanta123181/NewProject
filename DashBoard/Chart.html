@@ -1,0 +1,307 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="../Plugins/JS/Jquery.3.3.1.js"></script>
+    <script src="../Plugins/JS/jquery-ui.min.js"></script>
+    <script src="../Plugins/JS/moment.min.js"></script>
+    <script src="../Plugins/JS/daterangepicker.js"></script>
+    <link href="../Plugins/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Plugins/CSS/styles.css" rel="stylesheet" />
+    <link href="../Plugins/CSS/daterangepicker.css" rel="stylesheet" />
+
+    <style type="text/css">
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 32px;
+        }
+
+        #power-gauge g.arc {
+            fill: #ccc;
+        }
+
+        #power-gauge g.pointer {
+            fill: #ffbe00;
+            stroke: #ffbe00;
+        }
+
+        #power-gauge g.label text {
+            text-anchor: middle;
+            font-size: 12px;
+            fill: #666;
+        }
+    </style>
+    <script type="text/javascript">
+        var MaxLength = 0;
+        $(document).ready(function () {
+            MaxLength = 10 * 500;
+            var gauge = function (container, configuration) {
+                var that = {};
+                var config = {
+                    size: 400,
+                    clipWidth: 300,
+                    clipHeight: 300,
+                    ringInset: 25,
+                    ringWidth: 25,
+
+                    pointerWidth: 15,
+                    pointerTailLength: 12,
+                    pointerHeadLengthPercent: 0.8,
+
+                    minValue: 0,
+                    maxValue: 10,
+
+                    minAngle: -105,
+                    maxAngle: 105,
+
+                    transitionMs: MaxLength,
+
+                    majorTicks: 15,
+                    innerTickSize:10, // set this value to be the size of the chart area
+                    outerTickSize:0,
+                    labelFormat: d3.format(',g'),
+                    labelInset: 15,
+
+                    arcColorFn: d3.interpolateHsl(d3.rgb('#ff0000'), d3.rgb('#00ff00'))
+                };
+                var range = undefined;
+                var r = undefined;
+                var pointerHeadLength = undefined;
+                var value = 0;
+
+                var svg = undefined;
+                var arc = undefined;
+                var scale = undefined;
+                var ticks = undefined;
+                var tickData = undefined;
+                var pointer = undefined;
+
+               // var donut = d3.layout.pie();
+
+                function deg2rad(deg) {
+                    return deg * Math.PI / 120;
+                }
+
+                function newAngle(d) {
+                    var ratio = scale(d);
+                    var newAngle = 240;
+                    return newAngle;
+                }
+
+                function configure(configuration) {
+                    var prop = undefined;
+                    for (prop in configuration) {
+                        config[prop] = configuration[prop];
+                    }
+
+                    range = config.maxAngle - config.minAngle;
+                    r = config.size / 2;
+                    pointerHeadLength = Math.round(r * config.pointerHeadLengthPercent);
+
+                    // a linear scale that maps domain values to a percent from 0..1
+                    scale = d3.scale.linear()
+                        .range([0, 1])
+                        .domain([config.minValue, config.maxValue]);
+
+                    ticks = scale.ticks(config.majorTicks);
+                    tickData = d3.range(config.majorTicks).map(function () { return 1 / config.majorTicks; });
+
+                    arc = d3.svg.arc()
+                        .innerRadius(r - config.ringWidth - config.ringInset)
+                        .outerRadius(r - config.ringInset)
+                        .startAngle(function (d, i) {
+                            var ratio = d * i;
+                            return deg2rad(config.minAngle + (ratio * range));
+                        })
+                        .endAngle(function (d, i) {
+                            var ratio = d * (i + 1);
+                            return deg2rad(config.minAngle + (ratio * range));
+                        });
+                }
+                that.configure = configure;
+
+                function centerTranslation() {
+                    return 'translate(' + r + ',' + r + ')';
+                }
+
+                function isRendered() {
+                    return (svg !== undefined);
+                }
+                that.isRendered = isRendered;
+
+                function render(newValue) {
+                    svg = d3.select(container)
+                        .append('svg:svg')
+                        .attr('class', 'gauge')
+                        .attr('width', config.clipWidth)
+                        .attr('height', config.clipHeight);
+
+                    var centerTx = centerTranslation();
+
+                    var arcs = svg.append('g')
+                        .attr('class', 'arc')
+                        .attr('transform', centerTx);
+
+                    arcs.selectAll('path')
+                        .data(tickData)
+                        .enter().append('path')
+                        .attr('fill', function (d, i) {
+                            return config.arcColorFn(d * i);
+                        })
+                        .attr('d', arc);
+
+                    var lg = svg.append('g')
+                        .attr('class', 'label')
+                        .attr('transform', centerTx);
+                    lg.selectAll('text')
+                        .data(ticks)
+                        .enter().append('text')
+                        .attr('transform', function (d) {
+                            var ratio = scale(d);
+                            var newAngle = config.minAngle + (ratio * range);
+                            return 'rotate(' + newAngle + ') translate(0,' + (config.labelInset - r) + ')';
+                        })
+                        .text(config.labelFormat);
+
+                    var lineData = [[config.pointerWidth / 2, 0],
+                    [0, -pointerHeadLength],
+                    [-(config.pointerWidth / 2), 0],
+                    [0, config.pointerTailLength],
+                    [config.pointerWidth / 2, 0]];
+                    var pointerLine = d3.svg.line().interpolate('monotone');
+                    var pg = svg.append('g').data([lineData])
+                        .attr('class', 'pointer')
+                        .attr('transform', centerTx);
+
+                    pointer = pg.append('path')
+                        .attr('d', pointerLine/*function(d) { return pointerLine(d) +'Z';}*/)
+                        .attr('transform', 'rotate(' + config.minAngle + ')');
+
+
+                    update(newValue === undefined ? 0 : newValue);
+                }
+                that.render = render;
+
+                function update(newValue, newConfiguration) {
+                    if (newConfiguration !== undefined) {
+                        configure(newConfiguration);
+                    }
+                    var ratio = scale(newValue);
+                    var newAngle = 240;
+                    pointer.transition()
+                        .duration(config.transitionMs)
+                        .ease('elastic')
+                        .attr('transform', 'rotate(' + newAngle + ')');
+                }
+                that.update = update;
+                configure(configuration);
+                return that;
+            };
+
+            function onDocumentReady() {
+
+
+                var powerGauge = new gauge('#power-gauge', {
+                    size: 300,
+                    transitionMs: 2000,
+                    maxValue: MaxLength,
+                    ringWidth: 20,
+                    clipWidth: 300,
+                    clipHeight: 300,
+                    pointerWidth:8,
+                    pointerHeadLengthPercent: 0.8,
+                    labelInset: 15,
+                });
+                powerGauge.render();
+
+                function updateReadings() {
+
+                    powerGauge.update(500);
+                }
+
+                // every few seconds update reading values
+             //   updateReadings();
+
+            }
+
+            onDocumentReady();
+            //$("#chart-container").insertFusionCharts({
+            //    type: "angulargauge",
+            //    width: "100%",
+            //    height: "100%",
+            //    dataFormat: "json",
+            //    dataSource: {
+            //        "chart": {
+            //            "caption": "Walmart's Customer Satisfaction Score",
+            //            "subcaption": "2017",
+            //            "lowerlimit": "0",
+            //            "upperlimit": "100",
+            //            "showvalue": "1",
+            //            "numbersuffix": "%",
+            //            "theme": "ocean"
+            //        },
+            //        "colorrange": {
+            //            "color": [
+            //                {
+            //                    "minvalue": "0",
+            //                    "maxvalue": "50",
+            //                    "code": "#F2726F"
+            //                },
+            //                {
+            //                    "minvalue": "50",
+            //                    "maxvalue": "75",
+            //                    "code": "#FFC533"
+            //                },
+            //                {
+            //                    "minvalue": "75",
+            //                    "maxvalue": "100",
+            //                    "code": "#62B58F"
+            //                }
+            //            ]
+            //        },
+            //        "dials": {
+            //            "dial": [
+            //                {
+            //                    "value": "50",
+            //                    "tooltext": "<b>9%</b> lesser that target"
+            //                }
+            //            ]
+            //        },
+            //        "trendpoints": {
+            //            "point": [
+            //                {
+            //                    "startvalue": "80",
+            //                    "displayvalue": "Target",
+            //                    "thickness": "2",
+            //                    "color": "#E15A26",
+            //                    "usemarker": "1",
+            //                    "markerbordercolor": "#E15A26",
+            //                    "markertooltext": "80%"
+            //                }
+            //            ]
+            //        }
+            //    }
+            //});
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <div >
+        <div id="power-gauge"></div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
