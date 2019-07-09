@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>IOT-Dashboard</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- <link rel="shortcut icon" href="images/cmplogo.png" type="image/png"> -->
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+
+	<style>
+
+		ul.tree, ul.tree ul {
+     list-style-type: none;
+     background: url(images/vline.png) repeat-y;
+     margin: 0;
+     padding: 0;
+   }
+   
+   ul.tree ul {
+     margin-left: 10px;
+   }
+
+   ul.tree li {
+     margin: 0;
+     padding: 0 12px;
+     line-height: 20px;
+     background: url(images/node.png) no-repeat;
+     color: #369;
+     font-weight: bold;
+   }
+   ul.tree li.last {
+     background: #fff url(images/lastnode.png) no-repeat;
+   }
+
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('ul.tree li:last-child').addClass('last');
+		});
+	</script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 p-0">
+				<nav class="navbar navbar-light bg-light navbar-expand-lg p-1">
+					<a class="navbar-brand" href="index.html">
+						<img src="images/Flechazo-Logo.png" width="170" height="auto" class="d-inline-block align-top" alt="">
+					</a>
+					<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false"
+					 aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="navbar-nav">
+							
+
+						</ul>
+					</div> -->
+
+					<ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+						<!-- <li class="m-3">
+							<a class="btn btn-primary" href="#" id="DashDropdown">Today</a>
+						</li>
+						<li class="m-3">
+							<a class="btn btn-outline-primary" href="#" id="DashDropdown">Yesterday</a>
+						</li>
+						<li class="m-3">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Select From Date">
+									<div class="input-group-append">
+										<button class="btn btn-outline-primary" type="button"><i class="fas fa-calendar-alt"></i></button>
+									</div>
+								</div>
+							</li>
+						<li class="m-3">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Select To Date">
+								<div class="input-group-append">
+									<button class="btn btn-outline-primary" type="button"><i class="fas fa-calendar-alt"></i></button>
+								</div>
+							</div>
+						</li> -->
+						<li class="m-3">12:32 PM 19th Jan 2019</li>
+						<a class="navbar-brand" href="index.html">
+							<img src="images/teams-logo.png" width="250" height="auto" class="d-inline-block align-top" alt="">
+						</a>
+					</ul>
+
+
+				</nav>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container-fluid">
+		<h4 class="mt-1 p-1"><strong>Select Hotel For Review</strong></h4>
+		<div class="row justify-content-center">
+			<div class="col-md-4 m-2 p-3 bg-light" style="min-height: 300px;">
+				<h5 class="text-info"><strong>West Zone</strong></h5>
+				<div class="media">
+					&emsp;&emsp;&emsp;
+						<div class="media-body">
+							<button class="btn btn-success">Pune</button>
+							<div class="media mt-3">
+								<div class="media-body">
+									<div class="row">
+										<div class="col-md-2 pt-2">
+											<i class="fas fa-arrow-right"></i>
+										</div>
+										<div class="col-md-10 pl-0 pt-2">
+											<button class="btn btn-dark">Wakad</button>
+										</div>
+									</div>
+	
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+			</div>
+			<div class="col-md-4 m-2 p-4 bg-light" style="min-height: 300px;">
+				<h5 class="text-info"><strong>South Zone</strong></h5>
+				<div class="media">
+					&emsp;&emsp;&emsp;
+					<div class="media-body">
+						<button class="btn btn-success">Banglore</button>
+						<div class="media mt-3">
+							<div class="media-body">
+								<div class="row">
+									<div class="col-md-2 pt-2">
+										<i class="fas fa-arrow-right"></i>
+									</div>
+									<div class="col-md-10 pl-0 pt-2">
+										<button class="btn btn-dark">WhiteField</button>
+									</div>
+								</div>
+								<div class="row">
+										<div class="col-md-2 pt-2">
+											<i class="fas fa-arrow-right"></i>
+										</div>
+										<div class="col-md-10 pl-0 pt-3">
+											<button class="btn btn-dark">Marathalli</button>
+										</div>
+									</div>
+
+							</div>
+						</div>
+
+						<div class="mt-3">
+								<button class="btn btn-success">Hyderabad</button>
+								<div class="media mt-3">
+									<div class="media-body">
+										<div class="row">
+											<div class="col-md-2 pt-2">
+												<i class="fas fa-arrow-right"></i>
+											</div>
+											<div class="col-md-10 pl-0 pt-2">
+												<button class="btn btn-dark">Gachibowli</button>
+											</div>
+										</div>
+										<div class="row">
+												<div class="col-md-2 pt-2">
+													<i class="fas fa-arrow-right"></i>
+												</div>
+												<div class="col-md-10 pl-0 pt-3">
+													<button class="btn btn-dark">Madhapur</button>
+												</div>
+											</div>
+		
+									</div>
+								</div>
+						</div>
+						
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-12 pt-2">
+				<p class="text-center small"><i>Powered By</i><br>Hubmatrix Technologies Pvt. Ltd.</p>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
