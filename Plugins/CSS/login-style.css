@@ -1,0 +1,167 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-control-placeholder {
+    position: absolute;
+    top: 0;
+    padding: 7px 0 0 0px;
+    transition: all 200ms;
+    font-size: 18px;
+    color: #ccc;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+    font-size: 75%;
+    transform: translate3d(0, -100%, 0);
+    opacity: 1;
+}
+
+.form-control {
+    border: none;
+    border-radius: 0px;
+    border-bottom: thin solid darkgrey;
+}
+
+span.psw {
+    float: right;
+    font-size: 14px;
+    opacity: 0.8;
+    color: #2AA7E1;
+}
+.psw a {
+    color:#2AA7E1;
+    opacity:0.8;
+}
+
+.container1 {
+    display: block;
+    position: relative;
+    padding-left: 23px;
+    padding-top: 3px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    color: #000;
+}
+    /* Hide the browser's default checkbox */
+    .container1 input {
+        position: absolute;
+        opacity: 0;
+    }
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #2196F3;
+}
+
+/* On mouse-over, add a grey background color */
+.container1:hover input ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container1 input:checked ~ .checkmark {
+    background-color: #eee;
+    /*#2196F3*/
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: block;
+}
+
+/* Show the checkmark when checked */
+.container1 input:checked ~ .checkmark:after {
+    display: none;
+}
+
+/* Style the checkmark/indicator */
+.container1 .checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.btn {
+    padding: 0.375rem 1.75rem;
+    border-radius: 1.25rem;
+    background-color: #2196F3;
+    color: #fff;
+    cursor: pointer;
+    font-size: 23px;
+}
+
+.footer-text {
+    font-size: 10px;
+}
+
+
+#email-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 25px;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+.modal-body label {
+    margin-bottom: 0rem;
+    color: #757575;
+}

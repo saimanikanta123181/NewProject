@@ -1,0 +1,95 @@
+html,body{
+	height:100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: #E9E9E9;
+	/*-webkit-user-select: none; /* Safari 3.1+ */
+    /*-moz-user-select: none; /* Firefox 2+ */
+    /*-ms-user-select: none; /* IE 10+ */
+    /*user-select: none; /* Standard syntax */
+}
+
+.card-electricity {
+    border-bottom:5px solid #FF8000 !important;
+}
+.card-electricity-active {
+    border-bottom:5px solid #FF8000 !important;
+    background-color: #ffe2c6 !important;
+}
+.card-hvac {
+    border-bottom:5px solid #01A3FF !important;
+}
+.card-hvac-active {
+    border-bottom:5px solid #01A3FF !important;
+    background-color: #c6ebff !important;
+}
+.card-fuel {
+    border-bottom:5px solid #0EBC1A !important;
+}
+.card-fuel-active {
+    border-bottom:5px solid #0EBC1A !important;
+    background-color: #c1ffc5 !important;
+}
+.card-gas {
+    border-bottom:5px solid #F96262 !important;
+}
+.card-gas-active {
+    border-bottom:5px solid #F96262 !important;
+    background-color: #ffd6d6 !important;
+}
+.card-water {
+    border-bottom:5px solid #00BEF9 !important;
+}
+.card-water-active {
+    border-bottom:5px solid #00BEF9 !important;
+    background-color: #d6f5ff !important;
+}
+a {
+    color: #333333;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+a:hover, a:active {
+    color: #333333;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+.h5 h5 {
+    font-size: 18px !important;
+}
+
+.box-layout {
+    padding: 10px;
+    min-height: 230px;
+}
+
+hr {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+/* .main-block {
+    margin-top: 70px;
+} */
+/* custome scrollbar */
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+} */
+ 
+::-webkit-scrollbar-thumb {
+    background-color:#6C757D;
+    /*border-radius: 10px;*/
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color:#5e6266; 
+}
