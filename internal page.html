@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            font-family: poppins;
+            margin: 8px;
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            /*border: 1px solid #fff;*/
+            background-color: #2AA7E1;
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+                color: #fff;
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #6BC3EC;
+                }
+
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    background-color: #6BC3EC;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .tabcontent1 {
+            -webkit-animation: fadeEffect 1s;
+            animation: fadeEffect 1s;
+        }
+        /* Fade in tabs */
+        @-webkit-keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        select {
+            width: 100%;
+            padding: 7px 5px;
+            border: thin solid lightgrey;
+            border-radius: 4px;
+            /*background-color: #f1f1f1;*/
+        }
+
+        select {
+            color: gray;
+        }
+        .btn {
+            border-radius: 0px;
+            padding: 0.100rem .75rem;
+            margin:5px;
+        }
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .modal-header {
+            padding: 5px 15px;
+            background-color: #2AA7E1;
+            color: #fff;
+        }
+        .modal-input select, .modal-input input {
+            background-color: #f2f2f2;
+            margin: 0px 0px 20px 0px;
+            color: gray;
+            font-family: poppins;
+            width: 100%;
+            padding: 4px 5px;
+            border: none;
+            border-bottom: thin solid lightgrey;
+        }
+        .modal-footer button:nth-child(1) {
+            background-color: #fff;
+            border: thin solid #2AA7E1;
+            color: #2AA7E1;
+        }
+        .badge {
+            font-size: 67%;
+             font-weight: normal; 
+             border-radius: 0px; 
+        }
+
+        .accordion {
+            background-color: #2AA7E1;
+            color: #fff;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+            .active, .accordion:hover {
+                background-color: #6BC3EC;
+            }
+
+            .accordion:after {
+                content: '\002B';
+                color: #fff;
+                font-weight: bold;
+                float: right;
+                margin-left: 5px;
+            }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Heading div-->
+    <div>
+        <h4>Security</h4>
+        <h6>Control Panel - Security</h6>
+        <br />
+    </div>
+    <!-- /Heading div-->
+    <!-- Table div-->
+    <div>
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Roles')" id="defaultOpen">Roles</button>
+            <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
+            <button class="tablinks" onclick="openCity(event, 'StaffEntry')">Staff Entry</button>
+        </div>
+
+        <div id="Roles" class="tabcontent">
+            <form action="#">
+                <div class=" col-lg-3" style="display:inline-block;">
+                    <select id="description" name="description">
+                        <option value="" hidden>Description</option>
+                        <option value="d">Description</option>
+                        <option value="d1">Description1</option>
+                        <option value="d2">Description2</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float:right;">Add New Role</button>
+                <!-- Heading div-->
+                <div style="padding:15px;">
+                    <h5>Admin <span class="badge btn-success">Active</span></h5>
+                    <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tem</h6>
+                    <br />
+                </div>
+                <!-- /Heading div-->
+                <div style="padding:0px 15px;">
+                    <h5>Role Permissions</h5>
+                </div>
+
+                <div style="padding:0px 15px;">
+                    <button class="accordion">Helpdesk</button>
+                    <div class="panel">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+
+                    <button class="accordion">Equipments</button>
+                    <div class="panel">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+
+                    <button class="accordion">Request</button>
+                    <div class="panel">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                    <button class="accordion">Inventory</button>
+                    <div class="panel">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                    <button class="accordion">Energy</button>
+                    <div class="panel">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+                
+
+
+            </form>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">ADD ROLE</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container modal-input">
+                                <div>
+                                    <select id="role" name="role">
+                                        <option value="" hidden="hidden">Role - Description</option>
+                                        <option value="australia">Role1</option>
+                                        <option value="canada">Role2</option>
+                                    </select>
+
+                                    <input type="text" id="fname" name="description" placeholder="Description" />
+
+                                    <input type="text" id="uname" name="firstname" />
+
+                                    <div class="radio-inline">
+                                        <input type="radio" name="optradio" style="width:10%;" />Active
+                                        <input type="radio" name="optradio" style="width:10%;" />Deactive
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-info">Add</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--end of modal-->
+        </div>
+
+        <div id="Users" class="tabcontent tabcontent1">
+            <div>
+                <form class="form-inline" action="#">
+                    <div class=" col-lg-2">
+                        <select id="country" name="All Sites">
+                            <option value="" hidden>All Sites</option>
+                            <option value="d">Demo</option>
+                            <option value="d1">Demo1</option>
+                            <option value="d2">Demo2</option>
+                        </select>
+                    </div>
+
+                    <div class=" col-lg-2">
+                        <select id="country" name="All User Types">
+                            <option value="" hidden>All User Types</option>
+                            <option value="d">Demo</option>
+                            <option value="d1">Demo1</option>
+                            <option value="d2">Demo2</option>
+                        </select>
+                    </div>
+
+                    <div class=" col-lg-2">
+                        <select id="country" name="All Roles">
+                            <option value="" hidden>All Roles</option>
+                            <option value="d">Role1</option>
+                            <option value="d1">Role2</option>
+                            <option value="d2">Role3</option>
+                        </select>
+                    </div>
+
+                    <div class=" col-lg-2">
+                        <select id="country" name="Select Status">
+                            <option value="" hidden>Select Status</option>
+                            <option value="d">Active </option>
+                            <option value="d1">Deactive</option>
+                        </select>
+                    </div>
+                    <div class=" col-lg-4">
+                        <button type="submit" class="btn btn-info">View</button>
+                        <button type="submit" class="btn btn-info" style="float:right;">Add New User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="StaffEntry" class="tabcontent tabcontent1">
+            <h3>London2</h3>
+        </div>
+    </div>
+    <!-- /Table div-->
+
+
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
